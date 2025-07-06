@@ -4,98 +4,66 @@
   <meta charset="UTF-8" />
   <title>意识旅程</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       height: 100vh;
       font-family: "Helvetica Neue", sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #eee;
       overflow: hidden;
     }
-
-    /* 启动页样式 */
+    /* —— 启动页 —— */
     #start-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://w.wallhaven.cc/full/d6/wallhaven-d69eom.jpg') center center / cover no-repeat;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://w.wallhaven.cc/full/d6/wallhaven-d69eom.jpg')
+                  center center / cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       z-index: 999;
     }
-
     .start-text {
       text-align: center;
-      color: white;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 40px;
-      border-radius: 20px;
+      color: #fff;
+      background: rgba(0,0,0,0.5);
+      padding: 40px; border-radius: 20px;
       backdrop-filter: blur(4px);
     }
-
-    .start-text h1 {
-      margin: 0 0 10px 0;
-      font-size: 2rem;
-    }
-
-    .start-text p {
-      margin: 0;
-      font-size: 1.1rem;
-    }
-
     .start-text button {
       margin-top: 20px;
       padding: 10px 20px;
-      font-size: 1.2rem;
-      background-color: #1e90ff;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      cursor: pointer;
+      font-size: 1.1rem;
+      background: #1e90ff;
+      border: none; border-radius: 8px;
+      color: #fff; cursor: pointer;
     }
-
     .start-text button:hover {
-      background-color: #63b3ed;
+      background: #63b3ed;
     }
-
-    /* 主页面样式 */
+    /* —— 主页面 —— */
     #main-content {
       display: none;
+      width: 100%; height: 100%;
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      color: #eee;
     }
-
     #quote {
       font-size: 1.6rem;
-      text-align: center;
       max-width: 700px;
-      margin: 40px;
-      padding: 30px;
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 16px;
+      margin: 20px 0;
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 12px;
       backdrop-filter: blur(6px);
       opacity: 0;
       transition: opacity 0.8s ease;
     }
-
-    #quote.show {
-      opacity: 1;
-    }
-
+    #quote.show { opacity: 1; }
     button.main-btn {
       background: #1e90ff;
       border: none;
@@ -104,9 +72,8 @@
       border-radius: 12px;
       color: white;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.4s ease;
+      transition: transform .2s, background .4s;
     }
-
     button.main-btn:hover {
       transform: scale(1.05);
       background: #63b3ed;
@@ -114,11 +81,10 @@
   </style>
 </head>
 <body>
-  <!-- 欢迎页 -->
+  <!-- 启动页 -->
   <div id="start-screen">
     <div class="start-text">
       <h1>欢迎进入你的意识旅程</h1>
-      <p>Are you ready to cross the edge of thought?</p>
       <button onclick="enterSite()">进入</button>
     </div>
   </div>
@@ -142,17 +108,14 @@
       "不要去找答案，让问题自己腐烂。",
       "你想要的生活，其实早就活在另一个你身上。"
     ];
-
     function showRandomQuote() {
-      const quoteEl = document.getElementById("quote");
-      quoteEl.classList.remove("show");
+      const el = document.getElementById("quote");
+      el.classList.remove("show");
       setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * quotes.length);
-        quoteEl.textContent = quotes[randomIndex];
-        quoteEl.classList.add("show");
+        el.textContent = quotes[Math.floor(Math.random()*quotes.length)];
+        el.classList.add("show");
       }, 300);
     }
-
     function enterSite() {
       document.getElementById("start-screen").style.display = "none";
       document.getElementById("main-content").style.display = "flex";
