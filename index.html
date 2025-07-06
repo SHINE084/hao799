@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <title>意识旅程 · 带背景图</title>
+  <title>意识旅程</title>
   <style>
     * {
       box-sizing: border-box;
@@ -18,9 +18,57 @@
       align-items: center;
       color: #eee;
       overflow: hidden;
-      background: url('https://images.unsplash.com/photo-1602075425585-d54ba1a3b11d?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
-      background-size: cover;
     }
+
+    /* 启动页样式 */
+    #start-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=1500&q=80') center center / cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+    }
+
+    .start-text {
+      text-align: center;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .start-text button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      background-color: #1e90ff;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .start-text button:hover {
+      background-color: #63b3ed;
+    }
+
+    /* 正式页面样式 */
+    #main-content {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    }
+
     #quote {
       font-size: 1.6rem;
       text-align: center;
@@ -28,16 +76,17 @@
       margin: 40px;
       padding: 30px;
       background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
       backdrop-filter: blur(6px);
       opacity: 0;
       transition: opacity 0.8s ease;
     }
+
     #quote.show {
       opacity: 1;
     }
-    button {
+
+    button.main-btn {
       background: #1e90ff;
       border: none;
       padding: 12px 24px;
@@ -45,35 +94,29 @@
       border-radius: 12px;
       color: white;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
       transition: transform 0.2s ease, background 0.4s ease;
     }
-    button:hover {
+
+    button.main-btn:hover {
       transform: scale(1.05);
       background: #63b3ed;
-    }
-    button::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300%;
-      height: 300%;
-      background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 80%);
-      transform: translate(-50%, -50%) scale(0);
-      opacity: 0;
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
-    button:active::after {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <div id="quote">点击下方按钮，穿越意识的裂缝。</div>
-  <button onclick="showRandomQuote()">穿越</button>
+  <!-- 启动页 -->
+  <div id="start-screen">
+    <div class="start-text">
+      <h1>欢迎进入你的意识旅程</h1>
+      <button onclick="enterSite()">进入</button>
+    </div>
+  </div>
+
+  <!-- 主内容页 -->
+  <div id="main-content">
+    <div id="quote">点击下方按钮，穿越意识的裂缝。</div>
+    <button class="main-btn" onclick="showRandomQuote()">穿越</button>
+  </div>
 
   <script>
     const quotes = [
@@ -98,7 +141,11 @@
         quoteEl.classList.add("show");
       }, 300);
     }
+
+    function enterSite() {
+      document.getElementById("start-screen").style.display = "none";
+      document.getElementById("main-content").style.display = "flex";
+    }
   </script>
 </body>
 </html>
-
